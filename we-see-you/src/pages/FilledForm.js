@@ -18,7 +18,7 @@ export default function FilledForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (name !== "" && dob !== "") {
-      alert(`Name: ${name} & DOB: ${dob}`);
+      console.log(`Name: ${name} & DOB: ${dob}`);
     }
   };
 
