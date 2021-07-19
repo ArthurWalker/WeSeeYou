@@ -8,6 +8,8 @@ import {
   CSSReset,
 } from "@chakra-ui/core";
 import { useSelector, useDispatch } from "react-redux";
+import DisplayResult from "./pages/DisplayResult";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -18,7 +20,16 @@ export default function App() {
       <ColorModeProvider>
         <CSSReset />
         <ThemeToggler />
-        <FilledForm />
+        <Router>
+          <Switch>
+            <Route path="/" exact>
+              <FilledForm />
+            </Route>
+            <Route path="/display" exact>
+              <DisplayResult />
+            </Route>
+          </Switch>
+        </Router>
       </ColorModeProvider>
     </ThemeProvider>
   );

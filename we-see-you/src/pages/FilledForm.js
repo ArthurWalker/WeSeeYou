@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../css/FilledForm.module.css";
 import {
   Flex,
   Box,
@@ -9,16 +10,19 @@ import {
   Button,
 } from "@chakra-ui/core";
 import DatePicker from "react-datepicker";
-
+import { useHistory } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function FilledForm() {
   const [name, setName] = useState("");
   const [dob, setDob] = useState();
+  const history = useHistory();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (name !== "" && dob !== "") {
-      console.log(`Name: ${name} & DOB: ${dob}`);
+    if (name !== "" && dob !== undefined) {
+      console.log(name, dob);
+      history.push({ pathname: "/display", state: { name: name, dob: dob } });
     }
   };
 
@@ -40,12 +44,19 @@ export default function FilledForm() {
             </FormControl>
             <FormControl mt={6} isRequired>
               <FormLabel>Your date of birth</FormLabel>
-              <Box>
+              <Box className="datePicker_border">
                 <DatePicker
                   selected={dob}
                   onChange={(date) => setDob(date)}
                   showTimeSelect
-                  dateFormat="dd/MM/Y"
+                  selectedTime={true}
+                  dateFormat="dd/MM/Y h:mm aa"
+                  showMonthDropdown={true}
+                  placeholderText="Select a date"
+                  isClearable={true}
+                  withPortal
+                  showMonthYearDropdown
+                  strictParsing
                 />
               </Box>
             </FormControl>
