@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -25,19 +23,41 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <script src="https://connect.facebook.net/en_US/fbinstant.6.3.js"></script>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <script>
+        window.onload = function() {
+            FBInstant.intializeAsync()
+                .then(() => {
+                    // load your game
+                    return FBInstant.startGameAsync();
+                })
+                .then(() => {
+                    // Once all assets are loaded, tells the SDK
+                    // to end loading view and start the game
+                    FBInstant.startGameAsync().then(function() {
+                        // Retrieving context and player information can only be done
+                        // once startGameAsync() resolves
+                        var contextId = FBInstant.context.getID();
+                        var contextType = FBInstant.context.getType();
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+                        var playerName = FBInstant.player.getName();
+                        var playerPic = FBInstant.player.getPhoto();
+                        var playerId = FBInstant.player.getID();
+
+                        // Once startGameAsync() resolves it also means the loading view has
+                        // been removed and the user can see the game viewport
+
+                        game.start();
+                    });
+                });
+        };
+    </script>
+</body>
+
 </html>
