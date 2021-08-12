@@ -1,11 +1,13 @@
 // Contact.js
-import { Box, Button, Flex } from "@chakra-ui/core";
+import { Box, Button, Flex, Image } from "@chakra-ui/core";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
 import { useState, useEffect } from "react";
-import { CircleToBlockLoading } from "react-loadingg";
+import { DiamonLoading } from "react-loadingg";
+import { axios } from "axios";
+import "../css/FilledForm.css";
 
 function DisplayResult() {
   const location = useLocation();
@@ -26,14 +28,17 @@ function DisplayResult() {
 
   useEffect(() => {
     lucky_number = calLuckyNum(dob);
+    // axios
+    //   .get("https://tracuuthansohoc.com/xem-online/pdf/pdf_preview?c=")
+    //   .then((response) => {});
     const timer = setTimeout(() => {
       setNumber(lucky_number);
-    }, 1000);
+    }, 2000);
     return () => clearTimeout(timer);
   }, [dob]);
 
   if (number === undefined) {
-    return <CircleToBlockLoading />;
+    return <DiamonLoading />;
   }
 
   return (
@@ -42,6 +47,7 @@ function DisplayResult() {
         <h1>Hello {name}!</h1>
         <h2>Your DOB: {dob}</h2>
         <h2>Your Lucky Number:{number}</h2>
+
         <Button
           type="submit"
           variantColor="teal"

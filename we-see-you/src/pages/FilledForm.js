@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../css/FilledForm.module.css";
+import "../css/FilledForm.css";
 import {
   Flex,
   Box,
@@ -15,6 +15,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default function FilledForm() {
   const [name, setName] = useState("");
+  const [gender, setGender] = useState("");
   const [dob, setDob] = useState();
   const history = useHistory();
 

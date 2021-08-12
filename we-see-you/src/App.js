@@ -10,27 +10,30 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import DisplayResult from "./pages/DisplayResult";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./css/main.css";
 
 export default function App() {
   const dispatch = useDispatch();
   const counter = useSelector((state) => state.counter);
 
   return (
-    <ThemeProvider theme={theme}>
-      <ColorModeProvider>
-        <CSSReset />
-        <ThemeToggler />
-        <Router>
-          <Switch>
-            <Route path="/" exact>
-              <FilledForm />
-            </Route>
-            <Route path="/display" exact>
-              <DisplayResult />
-            </Route>
-          </Switch>
-        </Router>
-      </ColorModeProvider>
-    </ThemeProvider>
+    <div className="container">
+      <ThemeProvider theme={theme}>
+        <ColorModeProvider>
+          <CSSReset />
+          <ThemeToggler />
+          <Router>
+            <Switch>
+              <Route path="/" exact>
+                <FilledForm />
+              </Route>
+              <Route path="/display" exact>
+                <DisplayResult />
+              </Route>
+            </Switch>
+          </Router>
+        </ColorModeProvider>
+      </ThemeProvider>
+    </div>
   );
 }
